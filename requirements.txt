@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-decouple
+fastapi_jwt
+ormar
+databases
+SQLAlchemy
+python-decouple
+pydantic
+alembic
