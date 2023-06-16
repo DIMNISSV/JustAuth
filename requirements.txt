@@ -1,10 +1,11 @@
-fastapi
+fastapi~=0.95.2
 uvicorn
 python-decouple
 fastapi_jwt
-ormar
-databases
-SQLAlchemy
+ormar~=0.12.1
+databases~=0.6.2
+SQLAlchemy~=1.4.41
 python-decouple
-pydantic
+pydantic~=1.10.4
 alembic
+jose

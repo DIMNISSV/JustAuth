@@ -1,4 +1,4 @@
-from fastapi import Security, Depends, HTTPException
+from fastapi import HTTPException
 from fastapi_jwt import JwtAuthorizationCredentials
 
 

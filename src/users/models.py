@@ -12,21 +12,15 @@ class AuthRepr(BaseModel):
 
 
 class User(ormar.Model):
-    """
-    access_level, can be:
-    levels: Ads Admin Moderator Subscribe
-
-    """
-
     class Meta(BaseMeta):
         tablename = "users"
 
     pk: int = ormar.Integer(primary_key=True)
-    name: str = ormar.String(max_length=32, unique=True)
-    password: str = ormar.String(max_length=128, encrypt_secret=config("PASSWORD_SECRET"),
+    username: str = ormar.String(max_length=32, unique=True)
+    password: str = ormar.String(max_length=64, encrypt_secret=config("PASSWORD_SECRET"),
                                  encrypt_backend=ormar.EncryptBackends.HASH)
-    admin_level: ormar.JSON[dict] = ormar.JSON(default={"everywhere": 0})  # 1 - moder; 2 - admin; 3 - super_admin
-    subscribe_level: ormar.JSON[dict] = ormar.JSON(default={"everywhere": 0})
+    admin_level: ormar.JSON = ormar.JSON(default={"everywhere": 0})  # 1 - moder; 2 - admin; 3 - super_admin
+    subscribe_level: ormar.JSON = ormar.JSON(default={"everywhere": 0})
 
     def get_access_level(self, site: str | Request):
         return {
@@ -38,5 +32,5 @@ class User(ormar.Model):
         }
 
 
-UserLogin = User.get_pydantic(include={"name", "password"})
-UserRepr = User.get_pydantic(exclude={"password"})
+UserLogin = User.get_pydantic(include={"username", "password"})
+UserRepr = User.get_pydantic(exclude={"password", "admin_level", "subscribe_level"})

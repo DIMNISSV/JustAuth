@@ -5,7 +5,7 @@ from src.models.database import database
 app = FastAPI()
 app.state.database = database
 
-app.include_router(router, prefix="/users")
+app.include_router(router, prefix="/api/v1/users")
 
 
 @app.on_event("startup")
